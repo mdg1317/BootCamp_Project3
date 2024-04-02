@@ -23,5 +23,5 @@ function createMap(data){
 }
 
 d3.csv("static/resources/ufo.csv").then(function(data) {
-    createMap(data.slice(0, 1000));
+    createMap(data.slice(0, LIMIT));
 });
