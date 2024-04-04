@@ -49,7 +49,7 @@
           <!-- <h5>Filter by Year</h5> -->
           <label>Filter by Year:</label>
           <!-- #selDataset is where we'll insert years filter from dataset via JS -->
-          <select id="selDataset" onchange="optionChanged(jsonData, this.value)">
+          <select id="selDataset" onchange="optionChanged(jsonData, parseInt(this.value))">
             <!-- <option value="1984">1984</option> This is the format for pulldown options inserted by JS -->
           </select>
         </div>

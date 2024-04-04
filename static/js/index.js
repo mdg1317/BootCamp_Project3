@@ -25,10 +25,10 @@ function setMarkers(data, value){
     markerGroup.clearLayers();
 
     // Add markers for all data within selected year to marker group
-    let markerData = data.filter(d => d.datetime.slice(0, 4) == value);
+    let markerData = data.filter(d => parseInt(d.datetime.slice(0, 4)) == value);
     for(let i = 0; i < markerData.length; i++){
         markerGroup.addLayer(L.marker([markerData[i].latitude, markerData[i].longitude])
-        .bindPopup(`Location: ${markerData[i].city}, ${markerData[i].state.toUpperCase()}<br>Date/Time: ${data[i].datetime}`));
+        .bindPopup(`Location: ${markerData[i].city}, ${markerData[i].state.toUpperCase()}<br>Date/Time: ${markerData[i].datetime}`));
     }
 }
 
