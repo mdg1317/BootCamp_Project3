@@ -12,6 +12,9 @@ function init(data){
     years.sort().map(year => d3.select("#selDataset").append("option").text(year));
     setMarkers(data, d3.select("#selDataset").property("value"));
 
+    honeycomb_data(data, d3.select("#selDataset").property("value"));
+
+
     return data;
 }
 
@@ -35,7 +38,7 @@ function setMarkers(data, value){
 // Create the map object
 var myMap = L.map("map", {
     center: [39.8283, -98.5795],
-    zoom: 5
+    zoom: 4
 });
 
 // Add the tile layer
@@ -50,3 +53,17 @@ let markerGroup = L.markerClusterGroup().addTo(myMap);
 d3.csv("static/resources/ufo.csv").then(function(data) {
     jsonData = init(data);
 });
+
+
+// ############################
+// ####### Hex map Code #######
+// ############################
+
+function honeycomb_data(data, year) {
+    
+    let filteredData = data.filter(d => parseInt(d.datetime.slice(0, 4)) == year);
+    // from https://d3js.org/d3-array/group#rollup
+    const stateCounts = d3.rollup(filteredData, D => D.length, d => d.state);
+
+    console.log("State Counts:  ", stateCounts.get("ny"));
+};
