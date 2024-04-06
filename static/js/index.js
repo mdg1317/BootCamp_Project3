@@ -56,10 +56,11 @@ d3.csv("static/resources/ufo.csv").then(function(data) {
 });
 
 
-// ############################
-// ####### Hex map Code #######
-// ############################
+// ################################################
+// ############## Honeycomb Map Code ##############
+// ################################################
 
+// Retrieve's data for honecomb map
 function honeycomb_data(data, year) {    
     let filteredData = data.filter(d => parseInt(d.datetime.slice(0, 4)) == year);
     // from https://d3js.org/d3-array/group#rollup
@@ -78,34 +79,28 @@ function update_view(zoom) {
     myMap.setView(zoom[0], zoom[1]);
 };
 
-
+// Builds honeycomb map
 function honeycomb_map(stateCounts, year) {
     Highcharts.chart('honeycomb_map', {
         chart: {
             type: 'tilemap',
-            inverted: true,
-            // height: '80%'            
+            inverted: true,      
         },
     
         title: {
             text: `UFO Sightings by State in ${year}`,
-            style: {
-                fontSize: '1em'
-            }
+            style: {fontSize: '1em'}
         },
     
         // subtitle: {
         //     text: `UFO Sightings In ${year}`
         // },
     
-        xAxis: {
-            visible: false
-        },
-    
-        yAxis: {
-            visible: false
-        },
-    
+        //  Removes x & y labels and grid
+        xAxis: {visible: false},    
+        yAxis: {visible: false},
+
+        //  Color values for each hex
         colorAxis: {
             dataClasses: [{
                 from: 0,
@@ -138,7 +133,7 @@ function honeycomb_map(stateCounts, year) {
             headerFormat: '',
             pointFormat: '<h3 style="font-size: 1.4em; font-weight: 700; ">{point.name}</h3> <br/><hr/><p style="font-size: .9em; color: #535353;"><span style = "font-weight: 700;">UFO Sightings:</span>  {point.value}</p></div>'
         },
-    
+
         plotOptions: {
             tilemap: {
                 point: {
@@ -149,8 +144,6 @@ function honeycomb_map(stateCounts, year) {
                             console.log(clickedTile.options["coordinates"]);
                             let zoom = clickedTile.options["coordinates"];
                             update_view(zoom);
-
-
                         }
                     }
                 }
@@ -166,7 +159,8 @@ function honeycomb_map(stateCounts, year) {
                 }
             }
         },
-    
+        
+        // Sets state tiles in a grid along with additional metadata
         series: [{
             name: '',
             data: [{
