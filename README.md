@@ -47,5 +47,5 @@ The interactive dashboard for the *UFO Sightings in the United States* can be fo
 ## Epilogue
 Thank you for your attention.  If you don't mind, please look right here.
 
-![](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDRrbjF0MDE3N2V4bWU4eGF6bmVyMXZzMjY1d3hkd2xzd2pwZzJkaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6IPNUgkpCsDRK/giphy.gif)
+![Standard-issue Neuralyzer](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWV3Mm5nb3Y1M3hodHpuZzk3ZWhmMmliNzJiNzZicXZiMHkwcXc1eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/R7m04yMaGWVeE/giphy.gif)
 
