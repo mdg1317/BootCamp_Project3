@@ -104,7 +104,7 @@ body {
 
 #line_chart_container {
   /* border: 1px solid grey; */
-  height: 220px;
+  /* height: 220px; */
   padding: .7em;
 
 }
@@ -117,7 +117,7 @@ body {
 
 #bar_chart_container {
   /* border: 1px solid grey; */
-  height: 220px;
+  /* height: 220px; */
   padding: .7em;
   
 }
