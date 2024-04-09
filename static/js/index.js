@@ -1,3 +1,54 @@
+let traceBar = [
+    {
+      x: [],
+      y: [],
+      text: [],
+      type: "bar",
+      orientation: "h",
+    },
+  ];
+  let layoutBar = [
+    {
+        title: 'Sighting Shapes per Year',
+        height: 500,
+        width: 500,
+        xaxis: {
+            type: "category",
+      },
+    },
+  ];
+Plotly.newPlot("bar_chart", traceBar, layoutBar);
+
+let traceLine1 = [
+    {
+        x: [],
+        y: [],
+        mode: 'lines+markers'
+    }
+];
+
+// let traceLine2 = [
+//     {
+//         x: [],
+//         y: [],
+//         mode: 'lines+markers'
+//     }
+// ]
+
+// let lineData = [traceLine1, traceLine2]
+
+let layoutLine = [
+    {
+        title: 'UFO Sightings per Month',
+        height: 500,
+        width: 800, 
+        xaxis: {
+            
+        }
+    },
+  ];
+Plotly.newPlot("line_chart", traceLine1, layoutLine);
+
 function init(data){
     // Store all unique years in array
     let years = [];
@@ -11,9 +62,9 @@ function init(data){
     // Then initialize the map markers for the starting year
     years.sort().map(year => d3.select("#selDataset").append("option").text(year));
     setMarkers(data, d3.select("#selDataset").property("value"));
-
     honeycomb_data(data, d3.select("#selDataset").property("value"));
-
+    updateLineGraph(data, d3.select("#selDataset").property("value")); 
+    updateBarGraph(data, d3.select("#selDataset").property("value")); 
 
     return data;
 }
@@ -21,7 +72,9 @@ function init(data){
 function optionChanged(data, value){
     // Reset the markers every time a new year is selected
     setMarkers(data, value);
-    honeycomb_data(data, d3.select("#selDataset").property("value"));    
+    honeycomb_data(data, d3.select("#selDataset").property("value")); 
+    updateLineGraph(data, d3.select("#selDataset").property("value"));
+    updateBarGraph(data, d3.select("#selDataset").property("value"));    
 }
 
 function setMarkers(data, value){
@@ -34,6 +87,68 @@ function setMarkers(data, value){
         markerGroup.addLayer(L.marker([markerData[i].latitude, markerData[i].longitude])
         .bindPopup(`Location: ${markerData[i].city}, ${markerData[i].state.toUpperCase()}<br>Date/Time: ${markerData[i].datetime}`));
     }
+}
+
+function updateLineGraph(data, value) {
+    let lgraphData = data.filter(d => parseInt(d.datetime.slice(0, 4)) == value);
+    let monthCounts = {}
+    
+    let lineGraph1 = traceLine1[0];
+    // let lineGraph2 = traceLine2[0];
+    lgraphData.forEach(d => {
+        d.month = new Date(d.datetime).getMonth();
+    });
+    lgraphData.sort((a, b) => a.month - b.month);
+
+    const sortedMonths = lgraphData.map(d => ({
+        datetime: d.datetime
+    }));
+
+    sortedMonths.forEach(function(d) {
+        let date = new Date(d.datetime);
+        let month = date.getMonth()+1
+
+        if (month in monthCounts) {
+            monthCounts[month]++
+        } else {
+            monthCounts[month] = 1
+        }
+    })
+    // console.log(monthCounts)
+    const lineX = Object.keys(monthCounts);
+    const lineY  = Object.values(monthCounts);
+
+    lineGraph1.x = lineX
+    lineGraph1.y = lineY
+    Plotly.react("line_chart", traceLine1, layoutLine);
+}
+
+function updateBarGraph(data, value) {
+    let bgraphData = data.filter(d => parseInt(d.datetime.slice(0, 4)) == value);
+    let shapeCounts = {}
+
+    let barGraph = traceBar[0];
+
+    bgraphData.forEach(function(s) {
+        let shape = s.shape
+
+        if(shape in shapeCounts) {
+            shapeCounts[shape]++
+        } else {
+            shapeCounts[shape] = 1
+        }
+    });
+    
+    const shapeCountsArray = Object.entries(shapeCounts);
+    shapeCountsArray.sort((a, b) => a[1] - b[1]);
+    const sortedShapeCounts = Object.fromEntries(shapeCountsArray);
+    // console.log(sortedShapeCounts)
+    const barX = Object.values(sortedShapeCounts);
+    const barY = Object.keys(sortedShapeCounts);
+
+    barGraph.x = barX
+    barGraph.y = barY
+    Plotly.react("bar_chart", traceBar, layoutBar);
 }
 
 // Create the map object
