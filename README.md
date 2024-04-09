@@ -4,7 +4,7 @@
 ![FBI - Department of UFO Shenanigans](static/images/project_banner.jpg)
 
 ## Background
-We are exploring UFO sightings in the United States between 2010-2013.  We have created an interactive dashboard for a fictitious US intelligence agency to analyze UFO sightings and locations to determine when and where they are more likely to experience a close encounter. 
+We are exploring UFO sightings in the United States between 2009-2013.  We have created an interactive dashboard for a fictitious US intelligence agency to analyze UFO sightings and locations to determine when and where we are more likely to experience a close encounter. 
 
 Our dashboard includes a map that shows markers for each cluster and individual sighting which can be filtered by the year. A honeycomb tile map in the shape of the United States that will show the number of sightings per state.  When clicked, it will update the map view and will zoom the map to that region for further information. Also included is a line chart to show the trend over all of the years that compares the number of sightings by month. Lastly, we’re including a bar chart to show the frequency of individual UFO shapes.  
  
@@ -40,7 +40,12 @@ Lastly, we included a bar chart showing the top 10 shapes that were seen during 
 The interactive dashboard for the *UFO Sightings in the United States* can be found in the Live Demo.
 
 ### Conclusions
-Locations:
-Time of Year:
-Shape To Look For:
+- **Locations:**
+- **Time of Year:**
+- **Shape To Look For:**
+
+## Epilogue
+Thank you for your attention.  If you don't mind, please look right here.
+
+![](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDRrbjF0MDE3N2V4bWU4eGF6bmVyMXZzMjY1d3hkd2xzd2pwZzJkaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6IPNUgkpCsDRK/giphy.gif)
 
