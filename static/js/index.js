@@ -1,3 +1,5 @@
+// Setting the Trace and Layout settings for the initially emppty bar graph
+
 let traceBar = [
   {
     x: [],
@@ -5,17 +7,20 @@ let traceBar = [
     text: [],
     type: "bar",
     orientation: "h",
-  },
+    marker: {
+        color: '#b30000'
+      }
+  }
 ];
 let layoutBar = {
   title: "Sighting Shapes per Year",
   height: 400,
-  //width: 500,
-  xaxis: {
-    type: "category",
-  },
-};
+ 
+  };
+
 Plotly.newPlot("bar_chart", traceBar, layoutBar);
+
+// Setting the Traces and Layout settings for the initially emppty line graph
 
 let traceLine1 = 
   {
@@ -23,6 +28,10 @@ let traceLine1 =
     y: [],
     type: "scatter",
     mode: "lines+markers",
+    name: "2009",
+    line: {
+        color: '#d7191c'
+    }
   };
 
 let traceLine2 = 
@@ -31,6 +40,10 @@ let traceLine2 =
     y: [],
     type: "scatter",
     mode: "lines+markers",
+    name: "2010",
+    line: {
+        color: '#fdae61'
+    }
   };
 
 let traceLine3 = 
@@ -39,6 +52,10 @@ let traceLine3 =
     y: [],
     type: "scatter",
     mode: "lines+markers",
+    name: "2011",
+    line: {
+        color: '#ffeda0'
+    }
   };
 
 let traceLine4 = 
@@ -47,6 +64,10 @@ let traceLine4 =
     y: [],
     type: "scatter",
     mode: "lines+markers",
+    name: "2012",
+    line: {
+        color: '#a6d96a'
+    }
   };
 
 let traceLine5 = 
@@ -55,6 +76,10 @@ let traceLine5 =
     y: [],
     type: "scatter",
     mode: "lines+markers",
+    name: "2013",
+    line: {
+        color: '#1a9641'
+    }
   };
 
 let lineData = [traceLine1, traceLine2, traceLine3, traceLine4, traceLine5];
@@ -62,12 +87,13 @@ let lineData = [traceLine1, traceLine2, traceLine3, traceLine4, traceLine5];
 let layoutLine = {
   title: "UFO Sightings per Month",
   height: 400,
-//   width: 800,
   xaxis: {
-
+    ticktext: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    tickvals: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
   }
 };
 Plotly.newPlot("line_chart", lineData, layoutLine);
+
 
 function init(data) {
   // Store all unique years in array
@@ -95,7 +121,6 @@ function optionChanged(data, value) {
   // Reset the markers every time a new year is selected
   setMarkers(data, value);
   honeycomb_data(data, d3.select("#selDataset").property("value"));
-//   updateLineGraph(data, d3.select("#selDataset").property("value"));
   updateBarGraph(data, d3.select("#selDataset").property("value"));
 }
 
@@ -119,28 +144,17 @@ function setMarkers(data, value) {
 }
 
 function updateLineGraph(data) {
-  //let lgraphData = data.filter(d => parseInt(d.datetime.slice(0, 4)) == value);
+//Creating a function to create the line graph, starting with empty variables to hold the number
+//of sightings for each particular year in a dictionary
   let monthCounts2010 = {};
   let monthCounts2011 = {};
   let monthCounts2012 = {};
   let monthCounts2013 = {};
   let monthCounts2014 = {};
 
-//   let line1 = traceLine1[0];
-//   let line2 = traceLine2[0];
-//   let line3 = traceLine3[0];
-//   let line4 = traceLine4[0];
-//   let line5 = traceLine5[0];
-//   data.forEach((d) => {
-//     d.month = new Date(d.datetime).getMonth();
-//   });
-//   data.sort((a, b) => a.month - b.month);
-
-//   const sortedMonths = data.map((d) => ({
-//     datetime: d.datetime,
-//   }));
-
   data.forEach(function (d) {
+    // Extracting the date, moth and year and populating each of the above dictionaries with the 
+    // month (key) and count (value)
     let date = new Date(d.datetime);
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
@@ -178,7 +192,8 @@ function updateLineGraph(data) {
     }
 
   });
-//   console.log(monthCounts2014);
+// Once the dictionaries have been made, we extract the keys and values to later 
+// insert into our empty traces
   const lineX1 = Object.keys(monthCounts2010);
   const lineY1 = Object.values(monthCounts2010);
   const lineX2 = Object.keys(monthCounts2011);
@@ -191,7 +206,7 @@ function updateLineGraph(data) {
   const lineY5 = Object.values(monthCounts2014);
 
   
-
+// Inserting each set of data from above into the x and y values of each year's trace
   traceLine1.x = lineX1;
   traceLine1.y = lineY1;
   traceLine2.x = lineX2;
@@ -203,13 +218,13 @@ function updateLineGraph(data) {
   traceLine5.x = lineX5;
   traceLine5.y = lineY5;
 
-  console.log(lineData);
-  Plotly.newPlot("line_chart", lineData, layoutLine);
-
-  
+// Updating the plot with the new lineData
+  Plotly.newPlot("line_chart", lineData, layoutLine);  
 }
 
 function updateBarGraph(data, value) {
+// Starting a function to update the bar graph, using the dropdown value and data to extract
+// only the year we're interested in
   let bgraphData = data.filter(
     (d) => parseInt(d.datetime.slice(0, 4)) == value
   );
@@ -217,6 +232,7 @@ function updateBarGraph(data, value) {
 
   let barGraph = traceBar[0];
 
+  // Iterating through the data to count each different shape and inserting the data into a dictionary
   bgraphData.forEach(function (s) {
     let shape = s.shape;
 
@@ -227,11 +243,15 @@ function updateBarGraph(data, value) {
     }
   });
 
+  // converting the dictionary object into an array so it can then be sorted and sliced into the 
+  // top 10 most prominent shapes in the data
   const shapeCountsArray = Object.entries(shapeCounts);
-  let sortedCountArray = shapeCountsArray.sort((a, b) => a[1] - b[1]);
-  let topShapeCountArray = sortedCountArray.slice(0, 10);
+  let sortedCountArray = shapeCountsArray.sort((a, b) => b[1] - a[1]);
+  let topShapeCountArray = sortedCountArray.slice(0, 10).reverse();
   const sortedShapeCounts = Object.fromEntries(topShapeCountArray);
-  // console.log(sortedShapeCounts)
+ 
+  // creating separate variables for the shapes and their counts so they can be inserted into
+  // the empty bar graph and then updated with '.react'
   const barX = Object.values(sortedShapeCounts);
   const barY = Object.keys(sortedShapeCounts);
 
