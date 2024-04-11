@@ -21,7 +21,7 @@ Our dashboard includes a map that shows markers for each cluster and individual 
 
 ## Our Approach
 
-**Data Source:**  [UFO Sightings](https://www.kaggle.com/datasets/NUFORC/ufo-sightings) (Compiled from NUFORC data by [Sigmond Axel](https://github.com/planetsig/ufo-reports))
+**Data Source:**  [UFO Sightings](https://www.kaggle.com/datasets/NUFORC/ufo-sightings) (Compiled from [NUFORC](https://nuforc.org/) data by [Sigmond Axel](https://github.com/planetsig/ufo-reports))
 
 Since JavaScript natively works with JSON formatted data, we’re opting to extract and clean the data from the original CSV dataset using Python.  This will be loaded into a Mongo database before converting it into a JSON file. Our dataset comprises over 80,000 entries spanning approximately 100 years, making it impractical to visualize the entire dataset, especially for rendering map visualizations.  To address this, we've narrowed our focus to the United States and selected the most recent years with the highest number of sightings.  We used Python to reduce the original dataset by removing all non-US locations and narrowing the incident dates to 2009-2013.
 
@@ -37,8 +37,7 @@ Lastly, we included a bar chart showing the top 10 shapes that were seen during 
 
 ### Ethical Conciderations
 
-Data privacy in comarpison to the original data.  No personal information.  Just location and time data.  Data accuracy
-
+Our dataset excludes any personally identifying details, focusing solely on time, location, and event descriptions. We verified the original data from the NUFORC website to ensure it maintained anonymity to address potential privacy concerns.
 
 ## Results
 The interactive dashboard for the *UFO Sightings in the United States* can be found in the [Live Demo](https://mdg1317.github.io/BootCamp_Project3/).
