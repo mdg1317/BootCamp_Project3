@@ -35,14 +35,25 @@ The line chart shows the number of sightings and time of year they occurred.  We
 
 Lastly, we included a bar chart showing the top 10 shapes that were seen during that year.  This bit of information may be useful to know what to look for when we narrow down ideal time and places for a close encounter.
 
+### Ethical Conciderations
+
+Data privacy in comarpison to the original data.  No personal information.  Just location and time data.  Data accuracy
+
 
 ## Results
-The interactive dashboard for the *UFO Sightings in the United States* can be found in the Live Demo.
+The interactive dashboard for the *UFO Sightings in the United States* can be found in the [Live Demo](https://mdg1317.github.io/BootCamp_Project3/).
+
+[![Screenshot Example](static/images/sample.jpg)](https://mdg1317.github.io/BootCamp_Project3/)
 
 ### Conclusions
 - **Locations:**
+    - Los Angeles
+    - Miami
+    - Chicago
 - **Time of Year:**
+    - July
 - **Shape To Look For:**
+    - Circular lights in the sky.
 
 ## Epilogue
 Thank you for your attention.  If you don't mind, please look right here.
