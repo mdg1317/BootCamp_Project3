@@ -21,7 +21,7 @@ body {
   /* border: 1px solid rgb(107, 107, 107); */
   height: 85px;
   background: #000d1c;
-  background-image: url("static/images/fbibanner-frontpage.webp");
+  background-image: url("https://www.fbi.gov/++theme++fbi-youtube-fix/images/fbibanner-frontpage.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
