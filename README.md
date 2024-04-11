@@ -47,8 +47,13 @@ The interactive dashboard for the *UFO Sightings in the United States* can be fo
 
 ### Conclusions
 - **Locations:**
+    - Los Angeles
+    - Miami
+    - Chicago
 - **Time of Year:**
+    - July
 - **Shape To Look For:**
+    - Circular lights in the sky.
 
 ## Epilogue
 Thank you for your attention.  If you don't mind, please look right here.
