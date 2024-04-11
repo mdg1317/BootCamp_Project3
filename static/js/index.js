@@ -141,9 +141,11 @@ function setMarkers(data, value) {
   for (let i = 0; i < markerData.length; i++) {
     markerGroup.addLayer(
       L.marker([markerData[i].latitude, markerData[i].longitude]).bindPopup(
-        `Location: ${markerData[i].city}, ${markerData[
-          i
-        ].state.toUpperCase()}<br>Date/Time: ${markerData[i].datetime}`
+        `<b>Location:</b> ${markerData[i].city}, ${markerData[i].state.toUpperCase()}<br>\
+        <b>Date/Time:</b> ${markerData[i].datetime}<br>\
+        <b>Duration:</b> ${markerData[i].duration} seconds<br>\
+        <b>Shape:</b> ${markerData[i].shape}<br>\
+        <b>Comments:</b> ${markerData[i].comments}`
       )
     );
   }
