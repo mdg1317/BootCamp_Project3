@@ -282,7 +282,7 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 let markerGroup = L.markerClusterGroup().addTo(myMap);
 
 // Get the data from the file
-d3.csv("static/resources/ufo.csv").then(function (data) {
+d3.json("static/resources/UFO_Project_3.Cleaned_Data.json").then(function (data) {
   jsonData = init(data);
 });
 
